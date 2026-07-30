@@ -92,7 +92,7 @@ print(length*breadth)
 
 length,breadth = map(int,input("Enter the values:").split(','))
 area = length * breadth
-print(area)'''
+print(area)
 
 
 #Assignment operators -->assign the values
@@ -106,7 +106,7 @@ b = 35
 b += a #b = b + a
 print(b)
 b -= 5
-print(b)
+print(b)#=b-5
 
 # Task : *=,/=,//=,%= workout
 b *= 5
@@ -117,6 +117,59 @@ b //= 5
 print(b)
 b %= 5
 print(b)
+
+# Comparision operators -->we compare the values -->boolean
+# == (equal to), !=(not equal to),<(less than),>(greater than)
+# <=(less than or equal to)>=(greater than or equal to)
+
+age = 25
+print(age==25)
+print(age!=35)
+print(age<25)
+print(age>35)
+print(age>=35)
+
+print(-5<-1)
+
+#Membership operators -->in not in
+#it checks for the existence of an object in a collection
+
+marks = [56,75,45,85]
+print(35 in marks)
+#print (35 in 355) #type error
+
+print(25 not in marks)
+print('code' in 'codegnan')
+print('$' in 'abc$frg')
+
+#logical Operators -->logical decision making --> and,or,not
+#and-->all conditions to be satisfied
+#or-->any one condition to be satisfied
+
+a = (25 in [25,45,65]) and 45<56
+print(a)
+b = 45>56 or 25<=45
+print(b)
+c = not True
+print(c)
+'''
+#Identity operators -->check for identity of an object -->id()
+
+a = 35
+b = 35
+print(id(a))
+print(id(b))
+print(a is b)
+c =a
+print(id(c))
+print(c is a)
+
+a = [1,3,4,5]
+print(id(a))
+c = a
+print(id(c))
+print(c is a)
+
 
 
 

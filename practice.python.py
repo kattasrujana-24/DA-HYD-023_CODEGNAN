@@ -1,4 +1,4 @@
-
+'''
 #swapping
 a = 5
 b = 6
@@ -77,6 +77,39 @@ elif month==9 or month==10 or month==11:
     print("Season = Autumn")
 else:
     print("Invalid Month Entered")
+'''    
+result = 0
+for i in range(6):
+    result = result+i
+print(f'sum of 5 numbers is {result}')    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
                     
     
     

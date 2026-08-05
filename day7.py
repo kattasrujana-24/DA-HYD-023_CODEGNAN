@@ -107,11 +107,13 @@ while current_attempt < max_attempts:
       if entered_pin == pin:
             print("Login Succesful")
             break
+            #continue #it holds for this condition and skips to the next part of condition
       else:
           print("Entered PIN is wrong..Try again carefully")
           current_attempt +=1
 else:
     print("Account Locked,try after 24hours..")
+    
 
 
 

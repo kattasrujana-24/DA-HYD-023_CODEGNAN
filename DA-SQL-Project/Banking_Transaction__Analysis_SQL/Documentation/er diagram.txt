@@ -1,0 +1,33 @@
+day1
+ 
+Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(20) | NO   |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| eid    | int         | NO   | PRI | NULL    |       |
+| sname  | varchar(20) | NO   |     | NULL    |       |
+| salary | int         | YES  |     | NULL    |       |
+| email  | varchar(20) | YES  | UNI | NULL    |       |
+
+
+Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| did      | int         | NO   | PRI | NULL    |       |
+| dname    | varchar(20) | YES  | UNI | NULL    |       |
+| location | varchar(20) | YES  |     | NULL    |       |
+
+
+Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| pid      | int         | NO   | PRI | NULL    |       |
+| pname    | varchar(20) | NO   |     | NULL    |       |
+| price    | int         | YES  |     | NULL    |       |
+| quantity | int         | YES  |     | NULL    |       |
+

@@ -1,0 +1,304 @@
+# Banking Transaction Analysis – Database Design
+
+## 1. Introduction
+
+The Banking Transaction Analysis project is designed to store, manage, and analyze banking information using a relational database management system.
+
+The database maintains customer details, bank accounts, branches, transactions, account types, transaction types, and loans.
+
+The design follows relational database principles to reduce data redundancy, maintain data integrity, and support efficient SQL queries.
+
+## 2. Database Information
+
+**Database Name:** `banking_transaction_analysis`
+
+**Database Management System:** MySQL 8+
+
+**Development Tool:** MySQL Workbench
+
+**Database Type:** Relational Database
+
+**Normalization Target:** Third Normal Form (3NF)
+
+## 3. Database Tables
+
+The proposed database consists of seven tables.
+
+| Table Name | Purpose |
+|---|---|
+| customers | Stores customer information |
+| branches | Stores bank branch details |
+| account_types | Stores different account categories |
+| accounts | Stores customer bank account information |
+| transaction_types | Stores transaction categories |
+| transactions | Stores banking transaction records |
+| loans | Stores customer loan information |
+
+## 4. Detailed Table Structure
+
+### 4.1 Customers Table
+
+**Table Name:** `customers`
+
+**Purpose:** Stores personal and contact details of bank customers.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| customer_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| customer_name | VARCHAR(100) | NOT NULL |
+| email | VARCHAR(100) | UNIQUE |
+| phone | VARCHAR(15) | UNIQUE |
+| address | VARCHAR(255) | |
+| created_at | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP |
+
+### 4.2 Branches Table
+
+**Table Name:** `branches`
+
+**Purpose:** Stores information about bank branches.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| branch_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| branch_name | VARCHAR(100) | NOT NULL |
+| branch_city | VARCHAR(100) | NOT NULL |
+| branch_address | VARCHAR(255) | |
+| ifsc_code | VARCHAR(20) | UNIQUE, NOT NULL |
+
+### 4.3 Account Types Table
+
+**Table Name:** `account_types`
+
+**Purpose:** Stores different types of bank accounts.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| account_type_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| type_name | VARCHAR(50) | UNIQUE, NOT NULL |
+| description | VARCHAR(255) | |
+
+Examples include Savings Account, Current Account, and Salary Account.
+
+### 4.4 Accounts Table
+
+**Table Name:** `accounts`
+
+**Purpose:** Stores bank account details associated with customers.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| account_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| customer_id | INT | FOREIGN KEY, NOT NULL |
+| branch_id | INT | FOREIGN KEY, NOT NULL |
+| account_type_id | INT | FOREIGN KEY, NOT NULL |
+| account_number | VARCHAR(20) | UNIQUE, NOT NULL |
+| balance | DECIMAL(15,2) | NOT NULL, DEFAULT 0.00 |
+| account_status | VARCHAR(20) | DEFAULT 'Active' |
+| opened_date | DATE | |
+
+**Foreign Keys:**
+
+- `customer_id` references `customers(customer_id)`
+- `branch_id` references `branches(branch_id)`
+- `account_type_id` references `account_types(account_type_id)`
+
+### 4.5 Transaction Types Table
+
+**Table Name:** `transaction_types`
+
+**Purpose:** Stores categories of banking transactions.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| transaction_type_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| type_name | VARCHAR(50) | UNIQUE, NOT NULL |
+| description | VARCHAR(255) | |
+
+Examples include Deposit, Withdrawal, and Transfer.
+
+### 4.6 Transactions Table
+
+**Table Name:** `transactions`
+
+**Purpose:** Stores financial transaction records.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| transaction_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| account_id | INT | FOREIGN KEY, NOT NULL |
+| transaction_type_id | INT | FOREIGN KEY, NOT NULL |
+| amount | DECIMAL(15,2) | NOT NULL |
+| transaction_date | DATETIME | DEFAULT CURRENT_TIMESTAMP |
+| status | VARCHAR(20) | DEFAULT 'Pending' |
+| description | VARCHAR(255) | |
+| destination_account_id | INT | FOREIGN KEY, NULL |
+
+**Foreign Keys:**
+
+- `account_id` references `accounts(account_id)`
+- `transaction_type_id` references `transaction_types(transaction_type_id)`
+- `destination_account_id` references `accounts(account_id)`
+
+**Additional Constraints:**
+
+- Transaction amount must be greater than zero.
+- Status should be restricted to valid values such as Pending, Completed, and Failed.
+- Destination account is optional for deposits and withdrawals.
+
+### 4.7 Loans Table
+
+**Table Name:** `loans`
+
+**Purpose:** Stores customer loan details.
+
+| Column Name | Data Type | Constraint |
+|---|---|---|
+| loan_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| customer_id | INT | FOREIGN KEY, NOT NULL |
+| loan_type | VARCHAR(50) | NOT NULL |
+| loan_amount | DECIMAL(15,2) | NOT NULL |
+| interest_rate | DECIMAL(5,2) | |
+| loan_status | VARCHAR(20) | DEFAULT 'Pending' |
+| issued_date | DATE | |
+
+**Foreign Key:**
+
+- `customer_id` references `customers(customer_id)`
+
+**Additional Constraints:**
+
+- Loan amount must be greater than zero.
+- Interest rate must not be negative.
+
+## 5. Database Relationships
+
+| Parent Table | Child Table | Relationship |
+|---|---|---|
+| customers | accounts | One-to-Many |
+| branches | accounts | One-to-Many |
+| account_types | accounts | One-to-Many |
+| accounts | transactions | One-to-Many |
+| transaction_types | transactions | One-to-Many |
+| customers | loans | One-to-Many |
+
+The transactions table also references accounts through `destination_account_id`, representing the receiving account in a transfer.
+
+The proposed schema does not require a separate one-to-one relationship. Its main relationships are one-to-many.
+
+## 6. ER Diagram Structure
+
+```text
+CUSTOMERS
+   |
+   | 1 : M
+   |
+ACCOUNTS -------- BRANCHES
+   |                 1 : M
+   |
+   | M : 1
+   |
+ACCOUNT_TYPES
+
+ACCOUNTS
+   |
+   | 1 : M
+   |
+TRANSACTIONS
+   |
+   | M : 1
+   |
+TRANSACTION_TYPES
+
+CUSTOMERS
+   |
+   | 1 : M
+   |
+LOANS
+```
+
+Each transaction references a source account and may also reference a destination account.
+
+## 7. Primary Keys
+
+Primary keys uniquely identify records in each table.
+
+| Table | Primary Key |
+|---|---|
+| customers | customer_id |
+| branches | branch_id |
+| account_types | account_type_id |
+| accounts | account_id |
+| transaction_types | transaction_type_id |
+| transactions | transaction_id |
+| loans | loan_id |
+
+## 8. Foreign Keys
+
+Foreign keys maintain referential integrity between related tables.
+
+| Table | Foreign Key | Referenced Table |
+|---|---|---|
+| accounts | customer_id | customers |
+| accounts | branch_id | branches |
+| accounts | account_type_id | account_types |
+| transactions | account_id | accounts |
+| transactions | transaction_type_id | transaction_types |
+| transactions | destination_account_id | accounts |
+| loans | customer_id | customers |
+
+## 9. Database Constraints
+
+**PRIMARY KEY:** Ensures each record has a unique identifier.
+
+**FOREIGN KEY:** Maintains relationships between tables.
+
+**UNIQUE:** Prevents duplicate account numbers, IFSC codes, and other unique values.
+
+**NOT NULL:** Ensures mandatory information is provided.
+
+**DEFAULT:** Automatically assigns predefined values when no value is supplied.
+
+**CHECK:** Validates conditions such as positive transaction amounts and non-negative balances.
+
+## 10. Database Normalization
+
+The proposed database is organized using normalization principles.
+
+**First Normal Form (1NF):** Each column contains atomic values, and each table has a primary key.
+
+**Second Normal Form (2NF):** Every non-key attribute depends on the entire primary key.
+
+**Third Normal Form (3NF):** Customer, branch, account type, and transaction type information are stored separately to reduce transitive dependencies.
+
+The final schema should be reviewed against actual functional dependencies to confirm 3NF compliance.
+
+## 11. Indexing Strategy
+
+Indexes can be used to improve frequently executed queries.
+
+Recommended indexes include:
+
+- Customer name
+- Account number (already indexed through UNIQUE)
+- Transaction date
+- Transaction amount
+- Transaction status and date
+- Account ID and transaction date
+
+Primary keys, unique constraints, and some foreign key relationships already have supporting indexes. Additional indexes should be created only when useful for query performance.
+
+## 12. Data Integrity and Security
+
+The database design supports data integrity through primary keys, foreign keys, constraints, and transactions.
+
+Financial updates should use atomic database transactions with appropriate validation, locking, and rollback handling.
+
+Sensitive customer information should be protected through access controls. Only synthetic banking data should be included in public project repositories.
+
+## 13. Conclusion
+
+The Banking Transaction Analysis database design provides a structured foundation for managing banking records and generating transaction reports.
+
+The proposed seven-table relational model supports customer management, account management, transaction analysis, branch information, and loan records.
+
+It demonstrates the practical application of relational database design, normalization, constraints, relationships, and indexing using MySQL.

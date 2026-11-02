@@ -90,7 +90,7 @@ print("Intersection:",
 python_students.intersection(da_students))
 print("Only Python:",
 python_students.difference(da_students))
-print("Only ine course:",
+print("Only in course:",
 python_Students.symmetric_difference(da_students))
 
 print("DA subject of python:",

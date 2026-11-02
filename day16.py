@@ -5,7 +5,7 @@ Functions -->Argument Usage (Variable length arguments)
 Exception Handling / Scope of variables / Built-in Functions
 
 Exception Handling -->It is a mechanism that helps to respond or make the flow of execution in normal way,without
-this errors will occur and dirupt the flow of program
+this, errors will occur and disrupt the flow of program.
 
 Common Exceptions -->Value Error,TypeError,IndexError,AttributeError,ZeroDivisionError...
 
@@ -48,21 +48,21 @@ try:
     #print(a[4])
 except Exception as e:
     #print(e)
-
+'''
 def sample(*a,**b):
     """"Usage of both variable length and keyword variable length args"""
     result = 0
     for i in a:
         if type(i) in (int,float,complex):
-            reult = result + i
+            result = result + i
     print(result)
-    return result
+   
     for key,value in b.items():
         print(f'key is {key}')
-        print(f'vlaue is {value}')
+        print(f'value is {value}')
     return result
 sample(2,4,5,'police','codegnan',3,5,name="codegnan",place="hyd",batch= "da23")        
-
+'''
 try:
     a=[10,20,30]
     #a.append(24)
@@ -154,13 +154,13 @@ def outer():
     inner()
     print(f'Value outside is {count}')
 outer()    
-'''
+
 #Built-in functions -->variables BuiltinScope
 len = 56
 print(len+4)
 
 print(len('codegnan')) #TypeError -->  never evr use Builtin functions as Identifiers
-
+'''
 
 
 

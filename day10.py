@@ -110,10 +110,19 @@ print(names)
 names.remove(14)
 print(names)
 #names.remove(14) #it raises ValueError
-del names[1:3]
+del names[1:3] #del keyword will apply permanent changes
 print(names)
 names.clear() #clear will remove all elements and returns empty list
 print(names)
+
+#data = ['codegnan','saketh','python','java'] #input
+#output should be as follows
+'''
+0 : codegnan
+1 : saketh
+2 : python
+3 : java
+'''
 
 
 

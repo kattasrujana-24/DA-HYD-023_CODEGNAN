@@ -143,15 +143,32 @@ print(a,b)
 a = tuple(map(int,input("Enter the values:").split(',')))
 print(a,)
 
-'''
-print('9+4')
-#eval() function can take any kind of input
+
+print('9+4') #eval() function can take any kind of input
 print(eval('9+4'))
 
 a = eval(input("Enter a List:")) #in this case you can exactly enter data as list
 print(a)
 print(type(a))
-#
+'''
+#Task:Take a user input as string,do this in two ways..
+'''
+1) give the count of each repeating character
+Test Case 1: programming
+
+r is repeating 2 times
+g is repeating 2 times
+m is repeating 2 times
+
+2)
+r is repeating 2 times
+index = [1,4]
+g is repeating 2 times
+index[3,10]
+m is repeating 2 times
+index = [6,7]
+'''
+
 
 
 

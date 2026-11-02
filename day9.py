@@ -107,6 +107,7 @@ print(b)
 print('234'.zfill(4))
 print('234'.zfill(7))
 
+#center(),ljust().rjust() -->Alignment of strings (checks length and modifies the width accordingly)
 print('hai'.center(6))
 print('hai'.center(6,'#'))
 
